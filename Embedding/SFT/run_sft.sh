@@ -1,0 +1,21 @@
+torchrun --nproc_per_node 2 \
+-m FlagEmbedding.baai_general_embedding.finetune.run \
+--output_dir FlagEmbedding/sft/test \
+--model_name_or_path models/embedding/PubMedBERT \
+--train_data FlagEmbedding/sft/train_demo.jsonl \
+--learning_rate 2e-5 \
+--weight_decay 0.01 \
+--save_total_limit 20 \
+--fp16 \
+--num_train_epochs 20 \
+--per_device_train_batch_size 128 \
+--dataloader_drop_last True \
+--normlized True \
+--temperature 0.02 \
+--query_max_len 256 \
+--passage_max_len 256 \
+--warmup_steps 700 \
+--train_group_size 2 \
+--negatives_cross_device \
+--logging_steps 10 \
+--query_instruction_for_retrieval "" 
